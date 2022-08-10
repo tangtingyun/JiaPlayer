@@ -1,14 +1,20 @@
 package com.jingjing.study
 
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
+import android.provider.Settings.Secure
+import androidx.appcompat.app.AppCompatActivity
 import com.jingjing.study.databinding.ActivityMainBinding
+import com.jingjing.study.extension.logx
+import java.nio.charset.StandardCharsets
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    @SuppressLint("HardwareIds")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -17,6 +23,21 @@ class MainActivity : AppCompatActivity() {
 
         // Example of a call to a native method
         binding.sampleText.text = stringFromJNI()
+
+        binding.sampleText.setOnClickListener {
+            startActivity(Intent(this, NavHostActivity::class.java))
+        }
+        var identity = "0000000000000000"
+        var uuid = UUID.nameUUIDFromBytes(
+            identity.toByteArray(
+                StandardCharsets.UTF_8
+            )
+        )
+
+        var uuid2 = UUID.fromString(uuid.toString())
+        logx(uuid.toString())
+        logx("2  : $uuid2")
+        logx("3  : ${Secure.getString(contentResolver, Secure.ANDROID_ID)}")
     }
 
     /**
