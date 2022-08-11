@@ -12,6 +12,7 @@ import com.blankj.utilcode.util.PathUtils
 import com.jingjing.study.extension.logx
 import java.io.File
 import java.nio.ByteBuffer
+import java.nio.ByteOrder
 
 /*
 *
@@ -19,7 +20,7 @@ import java.nio.ByteBuffer
 *
 * */
 @SuppressLint("MissingPermission")
-class AudioRecordHelper() {
+class AudioRecordHelper {
 
     private var mAudioRecordMic: AudioRecord
 
@@ -88,7 +89,7 @@ class AudioRecordHelper() {
                 logx("返回码:   $read")
                 if (read > 0) {
                     FileIOUtils.writeFileFromBytesByStream(pcmFile, rawData, true)
-                    mediaEncode2(rawData, read)
+                    mediaEncode(rawData, read)
                 }
             }
             logx("停止录音")
@@ -102,24 +103,6 @@ class AudioRecordHelper() {
     private var mPresentationTime: Long = 0
     private var mTotalBytes: Long = 0
     private val TIMEOUT = 500L
-
-    private fun mediaEncode2(buffer: ByteArray, read: Int) {
-        logx("已经读取的长度:   $read")
-        if (read > 0) {
-            val bufferIndex: Int = encoderAAC.dequeueInputBuffer(TIMEOUT)
-            logx("送入编码的index:  $bufferIndex")
-            if (bufferIndex > 0) {
-                val buff: ByteBuffer = encoderAAC.getInputBuffer(bufferIndex)!!
-                buff.clear()
-                buff.put(buffer)
-                logx("对比取值 readBytes: $read   ---    bufferSize:  ${buff.capacity()}")
-                encoderAAC.queueInputBuffer(bufferIndex, 0, read, mPresentationTime, 0)
-                mPresentationTime = 1000000L * (read / 2) / sampleRateInHz
-                writeOutput()
-            }
-        }
-
-    }
 
     private fun mediaEncode(buffer: ByteArray, read: Int) {
         var readBytes = read

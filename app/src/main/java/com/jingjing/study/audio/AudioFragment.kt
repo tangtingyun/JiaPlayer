@@ -14,6 +14,7 @@ import com.permissionx.guolindev.PermissionX
 class AudioFragment : Fragment() {
     private lateinit var fragmentAudioBinding: FragmentAudioBinding
     private val mAudioRecordHelper = AudioRecordHelper()
+    private val mAsynAudioRecordHelper = AudioRecordAsynHelper()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +32,7 @@ class AudioFragment : Fragment() {
                 .permissions(Manifest.permission.RECORD_AUDIO)
                 .request { allGranted, grantedList, deniedList ->
                     if (allGranted) {
-                        mAudioRecordHelper.recordAudio()
+                        mAsynAudioRecordHelper.recordAudio()
                     } else {
                         Toast.makeText(
                             requireContext(),
@@ -43,7 +44,7 @@ class AudioFragment : Fragment() {
         }
 
         fragmentAudioBinding.btnStop.setOnClickListener {
-            mAudioRecordHelper.free()
+            mAsynAudioRecordHelper.free()
         }
     }
 
