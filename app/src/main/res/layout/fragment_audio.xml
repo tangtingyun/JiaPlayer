@@ -10,11 +10,23 @@
         android:id="@+id/btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/audio_record" />
+        android:text="@string/audio_record_start" />
 
     <Button
         android:id="@+id/btn_stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/audio_stop" />
+        android:text="@string/audio_record_stop" />
+
+    <Button
+        android:id="@+id/btn_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/audio_play_start" />
+
+    <Button
+        android:id="@+id/btn_play_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/audio_play_stop" />
 </LinearLayout>

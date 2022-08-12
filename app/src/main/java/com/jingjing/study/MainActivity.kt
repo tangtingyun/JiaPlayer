@@ -27,17 +27,6 @@ class MainActivity : AppCompatActivity() {
         binding.sampleText.setOnClickListener {
             startActivity(Intent(this, NavHostActivity::class.java))
         }
-        var identity = "0000000000000000"
-        var uuid = UUID.nameUUIDFromBytes(
-            identity.toByteArray(
-                StandardCharsets.UTF_8
-            )
-        )
-
-        var uuid2 = UUID.fromString(uuid.toString())
-        logx(uuid.toString())
-        logx("2  : $uuid2")
-        logx("3  : ${Secure.getString(contentResolver, Secure.ANDROID_ID)}")
     }
 
     /**

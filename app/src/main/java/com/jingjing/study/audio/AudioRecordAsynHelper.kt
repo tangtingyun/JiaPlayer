@@ -51,7 +51,7 @@ class AudioRecordAsynHelper {
         backHandler.post {
             inAudioBufferSize =
                 AudioRecord.getMinBufferSize(sampleRateInHz, inputChannelConfig, audioFormat)
-            logx("AudioRecord buffer size: $inAudioBufferSize")
+            logx("AudioRecordAsynHelper buffer size: $inAudioBufferSize")
             mAudioRecordMic = AudioRecord(
                 audioSource,
                 sampleRateInHz,

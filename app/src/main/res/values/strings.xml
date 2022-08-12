@@ -4,7 +4,10 @@
     <string name="audio_fragment">Audio Fragment</string>
 
 
-    <string name="audio_record">audio record</string>
+    <string name="audio_record_start">audio record start</string>
+    <string name="audio_record_stop">audio record stop</string>
 
-    <string name="audio_stop">audio stop</string>
+
+    <string name="audio_play_start">audio play start</string>
+    <string name="audio_play_stop">audio play stop</string>
 </resources>

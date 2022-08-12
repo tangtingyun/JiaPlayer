@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.jingjing.study.R
 import com.jingjing.study.databinding.FragmentAudioBinding
 import com.permissionx.guolindev.PermissionX
 
@@ -15,6 +14,8 @@ class AudioFragment : Fragment() {
     private lateinit var fragmentAudioBinding: FragmentAudioBinding
     private val mAudioRecordHelper = AudioRecordHelper()
     private val mAsynAudioRecordHelper = AudioRecordAsynHelper()
+    private val mAudioPlayerHelper = AudioPlayerPcmHelper()
+    private val mAudioAACPlayer = AudioPlayerAACHelper()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +46,14 @@ class AudioFragment : Fragment() {
 
         fragmentAudioBinding.btnStop.setOnClickListener {
             mAsynAudioRecordHelper.free()
+        }
+
+        fragmentAudioBinding.btnPlay.setOnClickListener {
+            mAudioAACPlayer.playAAc(requireContext())
+        }
+
+        fragmentAudioBinding.btnPlayStop.setOnClickListener {
+            mAudioPlayerHelper.free()
         }
     }
 
